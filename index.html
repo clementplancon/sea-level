@@ -70,10 +70,19 @@
       </button>
     </div>
 
-    <hr class="divider" />
+    <hr class="divider legend-divider" />
+
+    <button
+      class="legend-toggle"
+      type="button"
+      aria-expanded="false"
+      aria-controls="legend"
+    >
+      Afficher la légende
+    </button>
 
     <!-- Elevation legend -->
-    <div class="legend" aria-label="Légende altitude">
+    <div class="legend" id="legend" aria-label="Légende altitude">
       <div class="legend-title">Altitude du terrain</div>
       <div class="legend-bar" aria-hidden="true"></div>
       <div class="legend-axis">
@@ -87,7 +96,7 @@
       </div>
     </div>
 
-    <hr class="divider" />
+    <hr class="divider legend-divider" />
 
     <!-- Cursor elevation -->
     <div class="cursor-info">
