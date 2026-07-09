@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <title>Niveau de la Mer — Simulation</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌊</text></svg>" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="anonymous" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Full-screen map -->
+  <div id="map"></div>
+
+  <!-- Control panel -->
+  <aside id="panel" role="complementary" aria-label="Contrôles">
+
+    <header class="panel-header">
+      <span class="panel-icon" aria-hidden="true">🌊</span>
+      <div>
+        <h1 class="panel-title">Niveau de la Mer</h1>
+        <p class="panel-sub">Simulation d'impact climatique</p>
+      </div>
+    </header>
+
+    <!-- Big level display -->
+    <div class="level-card" aria-live="polite" aria-atomic="true">
+      <div class="level-value" id="value">0 m</div>
+      <div class="level-label">variation du niveau marin</div>
+    </div>
+
+    <!-- Scenario description -->
+    <p class="scenario-desc" id="scenario-desc">Niveau actuel des océans</p>
+
+    <!-- Slider -->
+    <div class="slider-section">
+      <div class="slider-bounds">
+        <span>−100 m</span>
+        <span>+200 m</span>
+      </div>
+      <input
+        type="range"
+        id="slider"
+        min="-100"
+        max="200"
+        value="0"
+        step="1"
+        aria-label="Variation du niveau de la mer en mètres"
+      />
+    </div>
+
+    <!-- Preset scenarios -->
+    <div class="presets" role="group" aria-label="Scénarios prédéfinis">
+      <button class="preset" data-level="-120" title="Maximum glaciaire (−20 000 ans)">
+        <span class="p-val">−120 m</span>
+        <span class="p-lbl">Ère glaciaire</span>
+      </button>
+      <button class="preset active" data-level="0" title="Niveau actuel">
+        <span class="p-val">0 m</span>
+        <span class="p-lbl">Actuel</span>
+      </button>
+      <button class="preset" data-level="7" title="Fonte totale du Groenland">
+        <span class="p-val">+7 m</span>
+        <span class="p-lbl">Groenland</span>
+      </button>
+      <button class="preset" data-level="65" title="Fonte de toutes les glaces terrestres">
+        <span class="p-val">+65 m</span>
+        <span class="p-lbl">Toutes glaces</span>
+      </button>
+    </div>
+
+    <hr class="divider" />
+
+    <!-- Elevation legend -->
+    <div class="legend" aria-label="Légende altitude">
+      <div class="legend-title">Altitude du terrain</div>
+      <div class="legend-bar" aria-hidden="true"></div>
+      <div class="legend-axis">
+        <span>Profond</span>
+        <span>0 m</span>
+        <span>Sommets</span>
+      </div>
+      <div class="legend-flood">
+        <span class="flood-swatch" aria-hidden="true"></span>
+        Zone submergée
+      </div>
+    </div>
+
+    <hr class="divider" />
+
+    <!-- Cursor elevation -->
+    <div class="cursor-info">
+      <span class="ci-label">Altitude sous le curseur</span>
+      <span class="ci-value" id="cursor-elev">—</span>
+    </div>
+
+    <!-- Data sources -->
+    <footer class="panel-footer">
+      Terrain&nbsp;: <a href="https://registry.opendata.aws/terrain-tiles/" target="_blank" rel="noopener">AWS&nbsp;Open&nbsp;Data</a> (SRTM/GEBCO)
+    </footer>
+
+  </aside>
+
+  <!-- Hint banner (auto-dismisses) -->
+  <div class="hint" id="hint" role="status">
+    ↕&nbsp; Faites glisser le curseur pour modifier le niveau de la mer
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin="anonymous"></script>
+  <script src="app.js"></script>
+</body>
+</html>
