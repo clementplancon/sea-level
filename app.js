@@ -217,6 +217,8 @@ const valueEl    = document.getElementById('value');
 const scenarioEl = document.getElementById('scenario-desc');
 const cursorEl   = document.getElementById('cursor-elev');
 const hintEl     = document.getElementById('hint');
+const panelEl    = document.getElementById('panel');
+const legendToggleEl = document.querySelector('.legend-toggle');
 
 // ── Scenario description helper ──────────────────────────────
 
@@ -270,6 +272,14 @@ sliderEl.addEventListener('input', () => applyLevel(sliderEl.value, false));
 document.querySelectorAll('.preset').forEach(btn => {
   btn.addEventListener('click', () => applyLevel(+btn.dataset.level, true));
 });
+
+if (legendToggleEl && panelEl) {
+  legendToggleEl.addEventListener('click', () => {
+    const expanded = panelEl.classList.toggle('legend-expanded');
+    legendToggleEl.setAttribute('aria-expanded', String(expanded));
+    legendToggleEl.textContent = expanded ? 'Masquer la légende' : 'Afficher la légende';
+  });
+}
 
 // Keyboard support on slider
 sliderEl.addEventListener('keydown', (e) => {
